@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>Basic Service Area</title>
+  
+  <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+  <style> 
+    body, html, #main { 
+      margin: 0; 
+      padding: 0; 
+      height: 100%; 
+      width: 100%;
+    }
+  </style> 
+  
+  <script src="https://js.arcgis.com/3.20/"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    EsriLoader.require([
+        "esri/map", 
+        "esri/config",
+        "esri/tasks/ServiceAreaTask", 
+        "esri/tasks/ServiceAreaParameters", 
+        "esri/tasks/FeatureSet",
+        "esri/symbols/SimpleMarkerSymbol", 
+        "esri/symbols/SimpleLineSymbol", 
+        "esri/symbols/SimpleFillSymbol",
+        "esri/geometry/Point", 
+        "esri/graphic",
+        "dojo/parser", 
+        "dojo/dom", 
+        "dijit/registry", 
+        "esri/Color", 
+        "dojo/_base/array",
+        "dijit/layout/BorderContainer", 
+        "dijit/layout/ContentPane", 
+        "dijit/form/HorizontalRule", 
+        "dijit/form/HorizontalRuleLabels", 
+        "dijit/form/HorizontalSlider",
+        "dojo/domReady!"
+      ])
+      .then(App)
+  </script>
+ 
+</head>
+
+<body class="claro"> 
+  <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false" style="width:100%;height:100%;margin:0px;">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+      <b>Click to find the service area polygon</b>
+
+      <div style="width: 400px; margin: 10px">
+        
+        <ol data-dojo-type="dijit/form/HorizontalRuleLabels"
+          data-dojo-props="
+            container: 'topDecoration',
+            style: 'height: 1.2em; font-weight: bold; margin: 0 12px;'">
+          <li>0</li>
+          <li>0:20</li>
+          <li>0:40</li>
+          <li>1:00</li>
+          <li>1:20</li>
+          <li>1:40</li>
+          <li>2:00</li>
+        </ol>
+        <div data-dojo-type="dijit/form/HorizontalRule"
+          data-dojo-props="
+            container: 'topDecoration',
+            count: 7,
+            style: 'height: 5px; margin: 0 12px;'">
+        </div>
+        <input id="hslider" value="60" type="range"
+          data-dojo-type="dijit/form/HorizontalSlider"
+          data-dojo-props="
+            minimum: 0,
+            maximum: 120,
+            showButtons: false,
+            discreteValues: 25">
+        <div style="padding-top: 10px; text-align: center;">Travel time: <strong id="decValue"></strong> seconds</div>
+      </div>
+
+    </div> 
+
+    <div id="map" dojotype="dijit/layout/ContentPane" data-dojo-props="region:'center'"></div>    
+  </div>
+</body>
+</html>
